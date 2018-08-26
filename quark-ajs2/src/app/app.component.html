@@ -1,0 +1,105 @@
+<md-sidenav-container fullscreen>
+    <md-toolbar color="primary">
+        <button md-button (click)="sidenav.toggle()">
+            <md-icon class="white-text">menu</md-icon>
+        </button>
+
+        <!-- This fills the remaining space of the current row -->
+        <span fxFlex>&nbsp;</span>
+
+        <button md-button>
+            <md-icon>account_box</md-icon>
+        </button>
+    </md-toolbar>
+
+    <md-sidenav #sidenav opened="true" mode="side" class="example-sidenav" color="primary">
+
+        <div style="display: block">
+            <div style="display: block">
+                <md-toolbar color="primary">Quark</md-toolbar>
+            </div>
+
+            <!-- Configuration -->
+
+            <panel [title]="'Configuration'" color="primary">
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Name Value Config</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Scheduled Tasks</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Manage Workflows</button>
+                </div>
+            </panel>
+
+            <!-- Security -->
+
+            <panel [title]="'Security'" color="primary">
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Manage Organizations</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Manage User Groups</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Manage Users</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Manage User Permissions</button>
+                </div>
+            </panel>
+
+            <!-- SA-MR -->
+
+            <panel [title]="'SA-MR'" color="primary">
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Dashboard</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Risk Charge Results</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Risk Charge Results by PO</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Risk Charge Results by Asset Class</button>
+                </div>
+
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Trade Level Risk Charge</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Upload Trade Sensitivities</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">View Validation Messages</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">Show Uploaded Data</button>
+                </div>
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left;" color="primary">SA-MR Execution Report</button>
+                </div>
+
+            </panel>
+
+            <!-- Ng Examples -->
+
+            <panel [title]="'Ng 2 Examples'" color="primary">
+                <div>
+                    <button md-button fxFlex style="padding : 0.1rem 2rem; text-align:left" color="primary">SA-MR Execution Report</button>
+                </div>
+            </panel>
+        </div>
+
+    </md-sidenav>
+    <md-card>
+        <md-card-content>
+            <h1>
+                {{quark.title}}-v{{quark.version}}
+            </h1>
+            <input [(ngModel)]="quark.title" placeholder="title">
+        </md-card-content>
+    </md-card>
+</md-sidenav-container>
