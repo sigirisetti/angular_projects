@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { MsgDialogComponent } from './common/msg-dialog/msg-dialog.component';
 import { PanelComponent } from './common/collapsible/panel/panel.component';
 
@@ -18,7 +18,7 @@ export class AppComponent {
         version : "0.1"
     }
 
-    constructor(public dialog: MdDialog) {
+    constructor(public dialog: MatDialog) {
     }
 
     openDialog() {

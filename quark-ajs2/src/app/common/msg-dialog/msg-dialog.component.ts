@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-msg-dialog',
