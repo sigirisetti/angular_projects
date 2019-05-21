@@ -24,6 +24,11 @@ export class AppComponent implements AfterViewInit {
           route: ''
         },
         {
+          displayName: 'Manage Scheduled Tasks',
+          iconName: 'star_rate',
+          route: 'common/config/sch-task',
+        },
+        {
           displayName: 'Manage Workflows',
           iconName: 'star_rate',
           route: '',
