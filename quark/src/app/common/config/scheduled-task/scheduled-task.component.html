@@ -1,0 +1,30 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="enabled">
+    <th mat-header-cell *matHeaderCellDef> Enabled? </th>
+    <td mat-cell *matCellDef="let element"> {{element.enabled}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cronExpression">
+    <th mat-header-cell *matHeaderCellDef> Cron Expression </th>
+    <td mat-cell *matCellDef="let element"> {{element.cronExpression}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="process">
+    <th mat-header-cell *matHeaderCellDef> Process </th>
+    <td mat-cell *matCellDef="let element"> {{element.process}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)">
+  </tr>
+
+</table>

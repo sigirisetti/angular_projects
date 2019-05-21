@@ -16,7 +16,8 @@ import {MenuListItemComponent} from './core/nav/menu-list-item/menu-list-item.co
 import { NavService } from './core/nav/nav.service';
 import { TopNavComponent } from './core/nav/top-nav/top-nav.component';
 import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
-import {MenuItem} from 'primeng/api';                 //api
+import {MenuItem} from 'primeng/api';
+import { ScheduledTaskComponent } from './common/config/scheduled-task/scheduled-task.component';                 //api
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MenuItem} from 'primeng/api';                 //api
     ThirdComponent,
     FourthComponent,
     MenuListItemComponent,
-    TopNavComponent
+    TopNavComponent,
+    ScheduledTaskComponent
   ],
   imports: [
     BrowserModule,
