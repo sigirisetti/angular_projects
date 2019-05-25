@@ -5,6 +5,7 @@ import {SecondComponent} from './second/second.component';
 import {ThirdComponent} from './third/third.component';
 import {FourthComponent} from './fourth/fourth.component';
 import {ScheduledTaskComponent} from './common/config/scheduled-task/scheduled-task.component'
+import {StocksComponent} from './samples/ws/stocks/stocks.component'
 
 const routes: Routes = [
   {path: '', component: FirstComponent, pathMatch: 'full'},
@@ -25,12 +26,9 @@ const routes: Routes = [
       ]},
     ]},
   ]},
-  {path: 'devfestfl', children: [
-    {path: 'sessions', children: [
-      {path: 'my-ally-cli', component: ThirdComponent},
-      {path: 'become-angular-tailer', component: FourthComponent},
-      {path: 'material-design', component: FirstComponent},
-      {path: 'what-up-web', component: SecondComponent}
+  {path: 'samples', children: [
+    {path: 'ws', children: [
+      {path: 'stocks', component: StocksComponent},
     ]},
     {path: 'speakers', children: [
       {path: 'michael-prentice', children: [

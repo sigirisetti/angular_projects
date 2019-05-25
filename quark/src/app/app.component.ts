@@ -29,6 +29,11 @@ export class AppComponent implements AfterViewInit {
           route: 'common/config/sch-task',
         },
         {
+          displayName: 'Stock Quotes',
+          iconName: 'star_rate',
+          route: 'samples/ws/stocks',
+        },
+        {
           displayName: 'Manage Workflows',
           iconName: 'star_rate',
           route: '',
