@@ -46,7 +46,7 @@ export class AppComponent implements AfterViewInit {
             {
               displayName: 'Organizations',
               iconName: 'domain',
-              route: ''
+              route: '/common/config/security/org/list-org'
             },
             {
               displayName: 'User Groups',

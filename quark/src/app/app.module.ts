@@ -13,6 +13,8 @@ import { TopNavComponent } from './core/nav/top-nav/top-nav.component';
 import { ScheduledTaskComponent } from './common/config/scheduled-task/scheduled-task.component';
 import { StocksComponent } from './samples/ws/stocks/stocks.component';
 import { PageUnderConstructionComponent } from './common/page-under-construction/page-under-construction.component';
+import { ListOrgComponent } from './common/config/security/org/list-org/list-org.component';
+import { HttpClientModule } from '@angular/common/http'; 
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { PageUnderConstructionComponent } from './common/page-under-construction
     TopNavComponent,
     ScheduledTaskComponent,
     StocksComponent,
-    PageUnderConstructionComponent
+    PageUnderConstructionComponent,
+    ListOrgComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { PageUnderConstructionComponent } from './common/page-under-construction
     FlexLayoutModule,
     MaterialModule,
     LayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [NavService],
   bootstrap: [AppComponent]
