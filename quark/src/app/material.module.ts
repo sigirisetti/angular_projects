@@ -14,6 +14,8 @@ import {PortalModule} from '@angular/cdk/portal';
 import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CdkTableModule} from '@angular/cdk/table';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -49,10 +51,6 @@ import {
 import {AppComponent} from './app.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from './app-routing.module';
-import { FirstComponent } from './first/first.component';
-import { SecondComponent } from './second/second.component';
-import { ThirdComponent } from './third/third.component';
-import { FourthComponent } from './fourth/fourth.component';
 
 /**
  * NgModule that includes all Material modules that are required.
@@ -102,6 +100,8 @@ import { FourthComponent } from './fourth/fourth.component';
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule,
+    //Others
+    AngularFontAwesomeModule
   ]
 })
 export class MaterialModule {}

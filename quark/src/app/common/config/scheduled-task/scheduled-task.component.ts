@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ScheduledTask} from '../scheduled-task'
+import {ScheduledTask} from './scheduled-task'
 
 
 const SCHTASKS: ScheduledTask[] = [

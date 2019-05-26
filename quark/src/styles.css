@@ -14,3 +14,6 @@
 body {
   margin: 0;
 }
+
+.cell-right .mat-column- { justify-content: flex-end; }
+

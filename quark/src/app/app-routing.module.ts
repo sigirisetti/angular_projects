@@ -1,28 +1,25 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {FirstComponent} from './first/first.component';
-import {SecondComponent} from './second/second.component';
-import {ThirdComponent} from './third/third.component';
-import {FourthComponent} from './fourth/fourth.component';
+import { PageUnderConstructionComponent } from './common/page-under-construction/page-under-construction.component';
 import {ScheduledTaskComponent} from './common/config/scheduled-task/scheduled-task.component'
 import {StocksComponent} from './samples/ws/stocks/stocks.component'
 
 const routes: Routes = [
-  {path: '', component: FirstComponent, pathMatch: 'full'},
+  {path: '', component: PageUnderConstructionComponent, pathMatch: 'full'},
   {path: 'common', children: [
     {path: 'config', children: [
       {path: 'sch-task', component: ScheduledTaskComponent}
     ]},
     {path: 'speakers', children: [
       {path: 'michael-prentice', children: [
-        {path: 'material-design', component: FirstComponent}
+        {path: 'material-design', component: PageUnderConstructionComponent}
       ]},
       {path: 'stephen-fluin', children: [
-        {path: 'what-up-web', component: SecondComponent}
+        {path: 'what-up-web', component: PageUnderConstructionComponent}
       ]},
       {path: 'mike-brocchi', children: [
-        {path: 'my-ally-cli', component: ThirdComponent},
-        {path: 'become-angular-tailer', component: FourthComponent}
+        {path: 'my-ally-cli', component: PageUnderConstructionComponent},
+        {path: 'become-angular-tailer', component: PageUnderConstructionComponent}
       ]},
     ]},
   ]},
@@ -32,14 +29,14 @@ const routes: Routes = [
     ]},
     {path: 'speakers', children: [
       {path: 'michael-prentice', children: [
-        {path: 'material-design', component: FirstComponent}
+        {path: 'material-design', component: PageUnderConstructionComponent}
       ]},
       {path: 'stephen-fluin', children: [
-        {path: 'what-up-web', component: SecondComponent}
+        {path: 'what-up-web', component: PageUnderConstructionComponent}
       ]},
       {path: 'mike-brocchi', children: [
-        {path: 'my-ally-cli', component: ThirdComponent},
-        {path: 'become-angular-tailer', component: FourthComponent}
+        {path: 'my-ally-cli', component: PageUnderConstructionComponent},
+        {path: 'become-angular-tailer', component: PageUnderConstructionComponent}
       ]},
     ]},
   ]}
