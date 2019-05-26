@@ -69,7 +69,8 @@ import { FourthComponent } from './fourth/fourth.component';
     ScrollDispatchModule,
     CdkStepperModule,
     CdkTableModule,
-    
+    FlexLayoutModule,
+
     // Material
     MatAutocompleteModule,
     MatButtonModule,
@@ -104,22 +105,3 @@ import { FourthComponent } from './fourth/fourth.component';
   ]
 })
 export class MaterialModule {}
-
-/*
-@NgModule({
-  imports: [
-    BrowserModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    AppRoutingModule
-  ],
-  declarations: [
-  ],
-  bootstrap: [],
-  providers: []
-})
-export class AppModule {}
-*/

@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-const socketIoConfig: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +31,6 @@ import { StocksComponent } from './samples/ws/stocks/stocks.component';         
   ],
   imports: [
     BrowserModule,
-    SocketIoModule.forRoot(socketIoConfig),
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,

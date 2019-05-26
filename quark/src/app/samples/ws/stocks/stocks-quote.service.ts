@@ -5,8 +5,6 @@ import { WebsocketService } from "../../../websocket.service";
 import { StockQuote } from './stock-quote';
 import { map } from 'rxjs/operators';
 import { webSocket } from 'rxjs/webSocket' // for RxJS 6, for v5 use Observable.webSocket
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { disconnect } from 'cluster';
 
 @Injectable({
   providedIn: 'root'
