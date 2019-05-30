@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tfxpricing": {
+    "nagare-mass-quotes": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/tfxpricing",
+            "outputPath": "dist/nagare-mass-quotes",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -59,18 +59,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tfxpricing:build"
+            "browserTarget": "nagare-mass-quotes:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "tfxpricing:build:production"
+              "browserTarget": "nagare-mass-quotes:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tfxpricing:build"
+            "browserTarget": "nagare-mass-quotes:build"
           }
         },
         "test": {
@@ -104,7 +104,7 @@
         }
       }
     },
-    "tfxPricing-e2e": {
+    "nagare-mass-quotes-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -113,11 +113,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "tfxpricing:serve"
+            "devServerTarget": "nagare-mass-quotes:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "tfxpricing:serve:production"
+              "devServerTarget": "nagare-mass-quotes:serve:production"
             }
           }
         },
@@ -133,5 +133,5 @@
       }
     }
   },
-  "defaultProject": "tfxpricing"
+  "defaultProject": "nagare-mass-quotes"
 }

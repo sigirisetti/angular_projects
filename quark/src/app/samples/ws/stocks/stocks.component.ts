@@ -17,7 +17,7 @@ export class StocksComponent implements OnInit {
 
   constructor(private stocksQuoteService: StocksQuoteService) {
     stocksQuoteService.messages.subscribe(msg => {
-      console.log(msg)
+      //console.log(msg)
       this.stockQuotes = msg;
     });
   }

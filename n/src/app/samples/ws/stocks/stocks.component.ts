@@ -12,15 +12,12 @@ export class StocksComponent implements OnInit {
   stockQuotes: StockQuote[];
   displayedColumns = ["symbol", "price"];
 
-  ngOnInit() {
+  constructor(private stocksQuoteService: StocksQuoteService) {
   }
 
-  constructor(private stocksQuoteService: StocksQuoteService) {
-    stocksQuoteService.messages.subscribe(msg => {
-      console.log(msg)
+  ngOnInit() {
+    this.stocksQuoteService.messages.subscribe(msg => {
       this.stockQuotes = msg;
     });
   }
-
-
 }
