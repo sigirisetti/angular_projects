@@ -54,11 +54,11 @@ export class MassQuoteService implements OnInit {
         massquote.settleDate = payload.settleDate;
 
         if (dataType === "com.ssk.ng.guimock.ws.MarketData") {
-            console.log("Market data")
+            //console.log("Market data")
             massquote.marketBid = payload.marketBid;
             massquote.marketAsk = payload.marketAsk;
         } else if (dataType === "com.ssk.ng.guimock.ws.MassQuotes") {
-            console.log("Mass Quote")
+            //console.log("Mass Quote")
             massquote.exchangeId = payload.exchangeId;
             massquote.customerId = payload.customerId;
             massquote.sessionId = payload.sessionId;
