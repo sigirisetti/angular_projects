@@ -15,7 +15,7 @@
 
       <ng-container matColumnDef="spotDate">
         <th mat-header-cell *matHeaderCellDef> Spot Date </th>
-        <td mat-cell class="cell-right" *matCellDef="let element"> {{element.spotDate}} </td>
+        <td mat-cell class="cell-right" *matCellDef="let element"> {{element.spotDate | date: 'yyyy-MM-dd' }} </td>
       </ng-container>
 
       <ng-container matColumnDef="marketBid">
@@ -29,7 +29,7 @@
       </ng-container>
 
       <ng-container matColumnDef="bid">
-        <th mat-header-cell *matHeaderCellDef> Bid </th>
+        <th mat-header-cell *matHeaderCellDef style="direction: rtl"> Bid </th>
         <td mat-cell class="cell-right" *matCellDef="let element"> {{element.bid | number:'1.5-5'}} </td>
       </ng-container>
 

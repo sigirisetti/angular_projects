@@ -133,5 +133,10 @@
       }
     }
   },
-  "defaultProject": "nagare-mass-quotes"
+  "defaultProject": "nagare-mass-quotes",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "css"
+    }
+  }
 }
