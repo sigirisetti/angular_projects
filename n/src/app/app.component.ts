@@ -10,7 +10,7 @@ import {NavService} from './core/nav/nav.service';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements AfterViewInit {
-  @ViewChild('appDrawer') appDrawer: ElementRef;
+  @ViewChild('appDrawer', { static: true }) appDrawer: ElementRef;
   version = VERSION;
   navItems: NavItem[] = [
     {
@@ -40,14 +40,14 @@ export class AppComponent implements AfterViewInit {
           route: 'samples/ws/stocks'
         },
         {
-          displayName: 'Page 1',
+          displayName: 'Line Chart',
           iconName: 'star_rate',
-          route: ''
+          route: 'samples/charts/line-chart'
         },
         {
-          displayName: 'Page 2',
+          displayName: 'Expandable Table Rows',
           iconName: 'star_rate',
-          route: ''
+          route: 'samples/ng-examples/expandable-table-rows'
         }
       ]
     }

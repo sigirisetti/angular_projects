@@ -11,11 +11,16 @@ import { MenuListItemComponent } from './core/nav/menu-list-item/menu-list-item.
 import { NavService } from './core/nav/nav.service';
 import { TopNavComponent } from './core/nav/top-nav/top-nav.component';
 import { StocksComponent } from './samples/ws/stocks/stocks.component';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
+
+import { ChartsModule } from 'ng2-charts';
 
 import { PageUnderConstructionComponent } from './common/page-under-construction/page-under-construction.component';
 import { TfxComponent } from './pricing/tfx/tfx.component';
 import { TfxLargeComponent } from './pricing/tfx-large/tfx-large.component';
+import { LineChartComponent } from './samples/charts/line-chart/line-chart.component';
+import { ExpandableTableComponent } from './samples/ng-examples/expandable-table/expandable-table.component';
+import { TfxPriceSeriesComponent } from './pricing/charts/tfx-price-series/tfx-price-series.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,9 @@ import { TfxLargeComponent } from './pricing/tfx-large/tfx-large.component';
     PageUnderConstructionComponent,
     TfxComponent,
     TfxLargeComponent,
+    LineChartComponent,
+    ExpandableTableComponent,
+    TfxPriceSeriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,10 +43,11 @@ import { TfxLargeComponent } from './pricing/tfx-large/tfx-large.component';
     MaterialModule,
     LayoutModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [NavService],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 }
