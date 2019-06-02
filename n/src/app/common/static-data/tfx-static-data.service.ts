@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { Currency } from './currency';
 
 import * as globals from '../../globals'
 
@@ -11,7 +14,7 @@ export class TfxStaticDataService {
   constructor(private http: HttpClient) { 
   }
 
-  getTfxCurrencies() {
-    return this.http.get(globals.restApiBase + "/tfxCurrencies")
+  getTfxCurrencies(): Observable<Currency[]> {
+    return this.http.get<Currency[]>(globals.restApiBase + "/tfxCurrencies");
   }
 }

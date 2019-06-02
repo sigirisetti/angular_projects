@@ -4,6 +4,9 @@ import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { MassQuoteService } from '../../mass-quotes-service'
 import { Subscription, Subscriber } from 'rxjs';
+import { TfxStaticDataService } from '../../../common/static-data/tfx-static-data.service'
+import { Currency } from '../../../common/static-data/currency';
+import * as globals from '../../../globals'
 
 @Component({
   selector: 'app-tfx-price-series',
@@ -16,8 +19,8 @@ export class TfxPriceSeriesComponent implements OnInit, OnDestroy {
 
   @Input()
   public ccyPair = "";
+
   private priceTickSub: Subscription;
-  private createTime = new Date();
 
   public lineChartLegend = true;
   public lineChartType = 'line';
@@ -28,13 +31,13 @@ export class TfxPriceSeriesComponent implements OnInit, OnDestroy {
     { data: [], label: 'Mkt Ask' },
     { data: [], label: 'Bid' },
     { data: [], label: 'Ask' },
-    { data: [], label: 'Spreads' }
+    //{ data: [], label: 'Spreads' }
   ];
 
   public lineChartLabels: Label[] = [];
   public lineChartLabelsInternal: Label[] = [];
 
-  constructor(private massQuoteService: MassQuoteService) {
+  constructor(private tfxStaticDataService: TfxStaticDataService, private massQuoteService: MassQuoteService) {
   }
 
   ngOnInit() {
@@ -45,54 +48,52 @@ export class TfxPriceSeriesComponent implements OnInit, OnDestroy {
     //console.log("tfx price series component destroyed!")
   }
 
-  public lineChartOptions: (ChartOptions & { annotation: any }) = this.getLineChartOptions();
-
-  getLineChartOptions() {
-    return {
-      responsive: true,
-      scales: {
-        // We use this empty structure as a placeholder for dynamic theming.
-        xAxes: [{
-          display: true,
+  public lineChartOptions: (ChartOptions & { annotation: any }) = {
+    responsive: true,
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      xAxes: [{
+        display: true,
+        ticks: {
+          fontColor: 'black',
+        }
+      }],
+      yAxes: [
+        {
+          id: 'y-axis',
+          position: 'left',
           ticks: {
             fontColor: 'black',
+            beginAtZero: false
           }
-        }],
-        yAxes: [
-          {
-            id: 'y-axis',
-            position: 'left',
-            ticks: {
-              fontColor: 'black',
-            }
-          }
-        ]
-      },
-      annotation: {
-        annotations: [
-          {
-            type: 'line',
-            mode: 'vertical',
-            scaleID: 'x-axis-0',
-            value: 'March',
-            borderColor: 'orange',
-            borderWidth: 2,
-            label: {
-              enabled: true,
-              fontColor: 'orange',
-              content: 'LineAnno'
-            }
-          },
-        ],
-      },
-      elements: {
-        line: {
-          tension: 0,
-          fill: false
         }
+      ]
+    },
+    annotation: {
+      annotations: [
+        {
+          type: 'line',
+          mode: 'vertical',
+          scaleID: 'x-axis-0',
+          value: 'March',
+          borderColor: 'orange',
+          borderWidth: 2,
+          label: {
+            enabled: true,
+            fontColor: 'orange',
+            content: 'LineAnno'
+          }
+        },
+      ],
+    },
+    elements: {
+      line: {
+        tension: 0,
+        fill: false
       }
-    };
-  }
+    }
+  };
+
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -103,28 +104,27 @@ export class TfxPriceSeriesComponent implements OnInit, OnDestroy {
     //console.log(event, active);
   }
 
-  public pushOne(tick) {
-    let len = 0;
-    this.lineChartData.forEach((x, i) => {
-      x.data.slice(1).push(tick[i]);
-      len = x.data.length;
-      //console.log("chart series data length : " + x.data.length)
-    })
-    if (this.lineChartLabelsInternal.length < len) {
-      this.lineChartLabelsInternal.push(`T-${this.lineChartLabelsInternal.length}`);
-    }
-    this.lineChartLabels = this.lineChartLabelsInternal.slice().reverse();
-    this.chart.update();
-  }
-
   public render() {
     this.getChartData(this.ccyPair);
     this.priceTickSub = this.subscribeToPriceTicks(this.ccyPair);
   }
 
   public stopRendering() {
-    //console.log("Un-subscribing price ticks for " + this.ccyPair)
     this.priceTickSub.unsubscribe();
+  }
+
+  public pushOne(tick) {
+    this.lineChartData.forEach((x, i) => {
+      if (x.data.length == globals.MAX_SERIES_LENGTH) {
+        x.data.slice(1);
+      }
+      x.data.push(tick[i]);
+    })
+    if (this.lineChartLabelsInternal.length < globals.MAX_SERIES_LENGTH) {
+      this.lineChartLabelsInternal.push(`T-${this.lineChartLabelsInternal.length}`);
+    }
+    this.lineChartLabels = this.lineChartLabelsInternal.slice().reverse();
+    this.chart.update();
   }
 
   subscribeToPriceTicks(ccyPair) {
@@ -138,6 +138,14 @@ export class TfxPriceSeriesComponent implements OnInit, OnDestroy {
 
   getChartData(ccyPair) {
     this.lineChartData = this.massQuoteService.getChartData(ccyPair);
+    let len = this.lineChartData[0].data.length;
+    if (this.lineChartLabelsInternal.length < globals.MAX_SERIES_LENGTH) {
+      this.lineChartLabelsInternal = [];
+      for (let i = 0; i < len; i++) {
+        this.lineChartLabelsInternal.push(`T-${i}`);
+      }
+      this.lineChartLabels = this.lineChartLabelsInternal.slice().reverse();
+    }
     //console.log("Got initial chart data for " + ccyPair + " with length " + this.lineChartData[0].data.length)
   }
 

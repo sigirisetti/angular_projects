@@ -2,16 +2,15 @@ import { Injectable, OnInit } from '@angular/core';
 import { Observable, Subscription, combineLatest, zip } from 'rxjs';
 import { map, concat } from 'rxjs/operators';
 import { Subject } from "rxjs";
-import { MassQuote } from './mass-quotes';
 import { webSocket } from 'rxjs/webSocket' // for RxJS 6, for v5 use Observable.webSocket
 import * as globals from '../globals'
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import CircularBuffer from 'circularbuffer'
 
+import { MassQuote } from './mass-quotes';
+import { Currency } from '../common/static-data/currency';
+
 import { TfxStaticDataService } from '../common/static-data/tfx-static-data.service'
-
-export const MAX_SERIES_LENGTH = 100;
-
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +21,7 @@ export class MassQuoteService implements OnInit {
 
     public messages: Subject<MassQuote> = new Subject();
     private massQuotes: Map<string, Array<MassQuote>> = new Map();
+    private currencies: Currency[];
 
     private mktBidSubjectMap: Map<String, Subject<number>> = new Map();
     private mktAskSubjectMap: Map<String, Subject<number>> = new Map();
@@ -45,9 +45,10 @@ export class MassQuoteService implements OnInit {
     getMassQuotes() {
 
         this.tfxStaticDataService.getTfxCurrencies().subscribe(
-            (res: string[]) => {
-                for (let cp of res) {
-
+            (res: Currency[]) => {
+                this.currencies = res;
+                for (let currency of res) {
+                    let cp = currency.symbol;
                     let mktBidSubject: Subject<number> = new Subject();
                     this.mktBidSubjectMap.set(cp, mktBidSubject);
 
@@ -68,11 +69,11 @@ export class MassQuoteService implements OnInit {
                     let tickSubject: Subject<number[]> = new Subject();
 
                     let chartDataSets: CircularBuffer<number>[] = [
-                        new CircularBuffer(MAX_SERIES_LENGTH),
-                        new CircularBuffer(MAX_SERIES_LENGTH),
-                        new CircularBuffer(MAX_SERIES_LENGTH),
-                        new CircularBuffer(MAX_SERIES_LENGTH),
-                        new CircularBuffer(MAX_SERIES_LENGTH)
+                        new CircularBuffer(globals.MAX_SERIES_LENGTH),
+                        new CircularBuffer(globals.MAX_SERIES_LENGTH),
+                        new CircularBuffer(globals.MAX_SERIES_LENGTH),
+                        new CircularBuffer(globals.MAX_SERIES_LENGTH),
+                        //new CircularBuffer(globals.MAX_SERIES_LENGTH)
                     ];
 
                     let initialchartDataSets: ChartDataSets[] = [
@@ -80,7 +81,7 @@ export class MassQuoteService implements OnInit {
                         { data: [], label: 'Mkt Ask' },
                         { data: [], label: 'Bid' },
                         { data: [], label: 'Ask' },
-                        { data: [], label: 'Spread' }
+                        //{ data: [], label: 'Spread' }
                     ];
                     this.initialchartingDataSetsMap.set(cp, initialchartDataSets);
                     this.chartingDataSetsMap.set(cp, chartDataSets);
@@ -196,5 +197,9 @@ export class MassQuoteService implements OnInit {
 
     getChartData(ccyPair) {
         return this.initialchartingDataSetsMap.get(ccyPair);
+    }
+
+    public getCurrencies() {
+        return this.currencies;
     }
 }

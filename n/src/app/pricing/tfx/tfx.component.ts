@@ -4,8 +4,11 @@ import { MassQuote } from '../mass-quotes';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import * as globals from '../../globals'
 
+import { Currency } from '../../common/static-data/currency';
 import { TfxStaticDataService } from '../../common/static-data/tfx-static-data.service'
 import { TfxPriceSeriesComponent } from '../charts/tfx-price-series/tfx-price-series.component'
+
+
 @Component({
   selector: 'app-tfx',
   templateUrl: './tfx.component.html',
@@ -23,7 +26,7 @@ export class TfxComponent implements OnInit {
   @ViewChildren(TfxPriceSeriesComponent) charts;
   private currentChart: TfxPriceSeriesComponent| null;
 
-  public tfxCcyPairs: Array<string> = new Array();
+  private currencies: Currency[];
   displayedColumns = ["symbol", "spotDate", "marketBid", "marketAsk", "bid", "ask", "spread"];
   massQuotes: MassQuote[] = new Array();
   tfxPrices: MassQuote[];
@@ -33,12 +36,12 @@ export class TfxComponent implements OnInit {
 
   ngOnInit() {
     this.tfxStaticDataService.getTfxCurrencies().subscribe(
-      (res: string[]) => {
-        this.tfxCcyPairs = res;
+      (res: Currency[]) => {
+        this.currencies = res;
         //console.log(res)
         for (let cp of res) {
           let q = new MassQuote();
-          q.symbol = cp;
+          q.symbol = cp.symbol;
           this.massQuotes.push(q);
         }
       },
@@ -72,5 +75,21 @@ export class TfxComponent implements OnInit {
       this.currentChart.stopRendering();
     }
     this.currentChart = selected;
+  }
+
+  getSuggestedMin(sym) {
+    for(let cp of this.currencies) {
+      if(cp.symbol === sym) {
+        return cp.chartLowerBound;
+      }
+    }
+  }
+
+  getSuggestedMax(sym) {
+    for(let cp of this.currencies) {
+      if(cp.symbol === sym) {
+        return cp.chartUpperBound;
+      }
+    }
   }
 }
