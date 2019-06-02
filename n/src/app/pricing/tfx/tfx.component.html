@@ -13,7 +13,7 @@
       <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
           <div class="tfx-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-            <app-tfx-price-series></app-tfx-price-series>
+            <app-tfx-price-series [ccyPair]="element.symbol"></app-tfx-price-series>
           </div>
         </td>
       </ng-container>
