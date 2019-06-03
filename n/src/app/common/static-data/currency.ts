@@ -1,5 +1,5 @@
 export class Currency {
-    symbol: String;
+    symbol: string;
     initialPrice: number;
     chartLowerBound: number;
     chartUpperBound: number;

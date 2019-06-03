@@ -1,6 +1,6 @@
 'use strict';
 
-export const MAX_SERIES_LENGTH = 100;
+export const MAX_SERIES_LENGTH = 500;
 
 export const restApiBase: string = "http://localhost:8888/gui-mock"
 export const wsBase: string = "ws://localhost:8888/gui-mock"
