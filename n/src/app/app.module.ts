@@ -21,6 +21,7 @@ import { TfxLargeComponent } from './pricing/tfx-large/tfx-large.component';
 import { LineChartComponent } from './samples/charts/line-chart/line-chart.component';
 import { ExpandableTableComponent } from './samples/ng-examples/expandable-table/expandable-table.component';
 import { TfxPriceSeriesComponent } from './pricing/charts/tfx-price-series/tfx-price-series.component';
+import { SnackBarComponent } from './common/snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { TfxPriceSeriesComponent } from './pricing/charts/tfx-price-series/tfx-p
     LineChartComponent,
     ExpandableTableComponent,
     TfxPriceSeriesComponent,
+    SnackBarComponent,
   ],
   imports: [
     BrowserModule,

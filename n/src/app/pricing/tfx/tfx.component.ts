@@ -7,7 +7,7 @@ import * as globals from '../../globals'
 import { Currency } from '../../common/static-data/currency';
 import { TfxStaticDataService } from '../../common/static-data/tfx-static-data.service'
 import { TfxPriceSeriesComponent } from '../charts/tfx-price-series/tfx-price-series.component'
-
+import { NotificationService } from '../../common/notification.service'
 
 @Component({
   selector: 'app-tfx',
@@ -32,7 +32,7 @@ export class TfxComponent implements OnInit {
   tfxPrices: MassQuote[];
   expandedElement: MassQuote | null;
 
-  constructor(private tfxStaticDataService: TfxStaticDataService, private massQuoteService: MassQuoteService) { }
+  constructor(private tfxStaticDataService: TfxStaticDataService, private massQuoteService: MassQuoteService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.tfxStaticDataService.getTfxCurrencies().subscribe(
@@ -45,7 +45,10 @@ export class TfxComponent implements OnInit {
           this.massQuotes.push(q);
         }
       },
-      error => console.log("TFX Currencies rest api error : " + error)
+      error => {
+        this.notificationService.error$.next("TFX Currencies rest api error : " + error.message);
+        console.log("TFX Currencies rest api error : " + error)
+      }
     );
 
 

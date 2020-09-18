@@ -2,6 +2,8 @@ import {Component, ViewChild, ElementRef, ViewEncapsulation, AfterViewInit} from
 import {VERSION} from '@angular/material';
 import {NavItem} from './core/nav/nav-item';
 import {NavService} from './core/nav/nav.service';
+import {NotificationService} from './common/notification.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -53,7 +55,23 @@ export class AppComponent implements AfterViewInit {
     }
   ];
 
-  constructor(private navService: NavService) {
+  constructor(
+    private navService: NavService, 
+    private snackBar: MatSnackBar, 
+    private notificationService: NotificationService) {
+
+      this.notificationService.notification$.subscribe(message => {
+        this.snackBar.open(message, "Close", {
+          duration: 3000,
+          panelClass: ['blue-snackbar']
+        });
+      });
+      this.notificationService.error$.subscribe(message => {
+        this.snackBar.open(message, "Close", {
+          duration: 3000,
+          panelClass: ['red-snackbar']
+        });
+      });
   }
 
   ngAfterViewInit() {

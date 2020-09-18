@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
+
 import { Observable, Subscription, combineLatest, zip } from 'rxjs';
 import { map, concat } from 'rxjs/operators';
 import { Subject } from "rxjs";
@@ -11,6 +12,7 @@ import { MassQuote } from './mass-quotes';
 import { Currency } from '../common/static-data/currency';
 
 import { TfxStaticDataService } from '../common/static-data/tfx-static-data.service'
+import { NotificationService } from '../common/notification.service'
 
 @Injectable({
     providedIn: 'root'
@@ -35,7 +37,7 @@ export class MassQuoteService implements OnInit {
     private tickSubjectMap: Map<string, Subject<number[]>> = new Map();
     private tickObsMap: Map<string, Observable<number[]>> = new Map();
 
-    constructor(private tfxStaticDataService: TfxStaticDataService) {
+    constructor(private tfxStaticDataService: TfxStaticDataService, private notificationService: NotificationService) {
         this.getMassQuotes();
     }
 
@@ -105,7 +107,10 @@ export class MassQuoteService implements OnInit {
                     });
                 }
             },
-            error => console.log("TFX Currencies rest api error : " + error)
+            error => {
+                this.notificationService.error$.next("TFX Currencies rest api error : " + error.message);
+                console.log("TFX Currencies rest api error : " + error)
+            }
         );
 
 
@@ -163,6 +168,7 @@ export class MassQuoteService implements OnInit {
             massquote.spread = payload.spread;
             this.spreadSubjectMap.get(massquote.symbol).next(massquote.spread);
         } else {
+            this.notificationService.error$.next("Unknown datatype : " + dataType);
             console.log("Unknown datatype : {}", dataType)
         }
         this.messages.next(massquote);
@@ -179,6 +185,7 @@ export class MassQuoteService implements OnInit {
 
     serverDisconnected() {
         console.log("Server disconnected")
+        this.notificationService.error$.next("Server disconnected");
         this.disconnected = true;
         this.reconnect()
     }
@@ -186,6 +193,7 @@ export class MassQuoteService implements OnInit {
     reconnect() {
         let that = this;
         setTimeout(function () {
+            that.notificationService.error$.next("Trying to reconnect to mass quotes web socket ..");
             console.log("Trying to reconnect to mass quotes web socket ..")
             that.getMassQuotes();
         }, 2000);
