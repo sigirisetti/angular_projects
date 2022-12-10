@@ -9,6 +9,7 @@ import { MaterialModule } from './material.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MenuListItemComponent } from './core/nav/menu-list-item/menu-list-item.component';
 import { NavService } from './core/nav/nav.service';
+import { TfxStaticDataService } from './common/static-data/tfx-static-data.service';
 import { TopNavComponent } from './core/nav/top-nav/top-nav.component';
 import { StocksComponent } from './samples/ws/stocks/stocks.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -48,7 +49,10 @@ import { SnackBarComponent } from './common/snack-bar/snack-bar.component';
     HttpClientModule,
     ChartsModule
   ],
-  providers: [NavService],
+  providers: [
+    NavService,
+    TfxStaticDataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+/*
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+body {
+    margin: 0;
+  }
+  
+  .cell-right .mat-column- { justify-content: flex-end; }
+  
+  
+  
+  /* Snack bar */
+  
+  .blue-snackbar {
+    background: #2196F3;
+  }
+  
+  .red-snackbar {
+    background: #F44336;
+  }
+  

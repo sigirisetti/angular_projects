@@ -6,7 +6,9 @@ import { Currency } from './currency';
 
 import * as globals from '../../globals'
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TfxStaticDataService {
 
   constructor(private http: HttpClient) { 
