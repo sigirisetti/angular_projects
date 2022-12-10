@@ -21,12 +21,12 @@ export class AppComponent implements AfterViewInit {
         {
           displayName: 'Excel',
           iconName: 'star_rate',
-          route: 'pricing/tfx'
+          route: 'pricing/spot-prices'
         },
         {
           displayName: 'LP',
           iconName: 'star_rate',
-          route: 'pricing/tfx-large',
+          route: 'pricing/spot-prices',
         },
       ]
     },

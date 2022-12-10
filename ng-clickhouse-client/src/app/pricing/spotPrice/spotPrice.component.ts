@@ -46,8 +46,8 @@ export class SpotPriceComponent implements OnInit {
         }
       },
       error => {
-        this.notificationService.error$.next("TFX Currencies rest api error : " + error.message);
-        console.log("TFX Currencies rest api error : " + error)
+        this.notificationService.error$.next("Forward CcyPair rest api error : " + error.message);
+        console.log("Forward CcyPair rest api error : " + error)
       }
     );
 

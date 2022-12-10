@@ -9,8 +9,8 @@ import { ExpandableTableComponent } from './samples/ng-examples/expandable-table
 const routes: Routes = [
   {path: '', component: PageUnderConstructionComponent, pathMatch: 'full'},
   {path: 'pricing', children: [
-    {path: 'tfx', component: SpotPriceComponent},
-    {path: 'tfx-large', component: SpotPriceComponent}
+    {path: 'spot-prices', component: SpotPriceComponent},
+    {path: 'spot-prices-other', component: SpotPriceComponent}
   ]},
   {path: 'samples', children: [
     {path: 'ws', children: [

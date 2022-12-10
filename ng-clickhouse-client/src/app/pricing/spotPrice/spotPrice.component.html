@@ -1,7 +1,7 @@
-<mat-card class="tfx-card">
+<mat-card class="spot-price-card">
 
   <mat-card-header>
-    <div mat-card-avatar class="tfx-header-image"></div>
+    <div mat-card-avatar class="spot-price-header-image"></div>
     <mat-card-title>Forward Curve</mat-card-title>
     <mat-card-subtitle>Forward Curve</mat-card-subtitle>
   </mat-card-header>
@@ -12,7 +12,7 @@
 
       <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-          <div class="tfx-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="spot-price-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
             <app-spot-price [ccyPair]="element.symbol"></app-spot-price>
           </div>
         </td>
@@ -61,11 +61,11 @@
       -->
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="tfx-element-row"
-        [class.tfx-expanded-row]="expandedElement === element"
+      <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="spot-price-element-row"
+        [class.spot-price-expanded-row]="expandedElement === element"
         (click)="onRowClicked(element)">
       </tr>
-      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="tfx-detail-row">
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="spot-price-detail-row">
       </tr>
 
     </table>

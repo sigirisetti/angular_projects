@@ -110,8 +110,8 @@ export class MassQuoteService implements OnInit {
                 }
             },
             error => {
-                this.notificationService.error$.next("TFX Currencies rest api error : " + error.message);
-                console.log("TFX Currencies rest api error : " + error)
+                this.notificationService.error$.next("Currencies rest api error : " + error.message);
+                console.log("Currencies rest api error : " + error)
             }
         );
 
@@ -161,7 +161,6 @@ export class MassQuoteService implements OnInit {
             //massquote.instrumentType = payload.instrumentType;
             //massquote.deliverable = payload.deliverable;
             massquote.spotDate = payload.spotDate;
-            //massquote.tfxLarge = payload.tfxLarge;
 
             massquote.bid = payload.bid;
             this.bidSubjectMap.get(massquote.symbol)?.next(massquote.bid);
