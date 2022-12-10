@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TfxComponent } from './tfx.component';
+import { TfxPriceSeriesComponent } from './live-series.component';
 
-describe('TfxComponent', () => {
-  let component: TfxComponent;
-  let fixture: ComponentFixture<TfxComponent>;
+describe('TfxPriceSeriesComponent', () => {
+  let component: TfxPriceSeriesComponent;
+  let fixture: ComponentFixture<TfxPriceSeriesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TfxComponent ]
+      declarations: [ TfxPriceSeriesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TfxComponent);
+    fixture = TestBed.createComponent(TfxPriceSeriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

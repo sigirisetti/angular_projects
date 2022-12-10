@@ -57,12 +57,11 @@ import { TopNavComponent } from './core/nav/top-nav/top-nav.component';
 import { LineChartComponent } from './samples/charts/line-chart/line-chart.component';
 import { ExpandableTableComponent } from './samples/ng-examples/expandable-table/expandable-table.component';
 import { StocksComponent } from './samples/ws/stocks/stocks.component';
-import { TfxPriceSeriesComponent } from './pricing/charts/tfx-price-series/tfx-price-series.component';
-import { TfxComponent } from './pricing/tfx/tfx.component';
-import { TfxLargeComponent } from './pricing/tfx-large/tfx-large.component';
+import { LiveSeriesComponent } from './pricing/charts/live-series/live-series.component';
+import { SpotPriceComponent } from './pricing/spotPrice/spotPrice.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavService } from './core/nav/nav.service';
-import { TfxStaticDataService } from './common/static-data/tfx-static-data.service';
+import { StaticDataService } from './common/static-data/static-data.service';
 
 @NgModule({
   imports: [
@@ -126,9 +125,8 @@ import { TfxStaticDataService } from './common/static-data/tfx-static-data.servi
     LineChartComponent,
     ExpandableTableComponent,
     StocksComponent,
-    TfxPriceSeriesComponent,
-    TfxComponent,
-    TfxLargeComponent
+    LiveSeriesComponent,
+    SpotPriceComponent,
   ],
   exports: [
     AppComponent,
@@ -139,13 +137,12 @@ import { TfxStaticDataService } from './common/static-data/tfx-static-data.servi
     LineChartComponent,
     ExpandableTableComponent,
     StocksComponent,
-    TfxPriceSeriesComponent,
-    TfxComponent,
-    TfxLargeComponent
+    LiveSeriesComponent,
+    SpotPriceComponent,
   ],
   providers: [
     NavService,
-    TfxStaticDataService
+    StaticDataService
   ],
   bootstrap: [AppComponent]
 })

@@ -5,14 +5,14 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import * as globals from '../../globals'
 
 import { Currency } from '../../common/static-data/currency';
-import { TfxStaticDataService } from '../../common/static-data/tfx-static-data.service'
-import { TfxPriceSeriesComponent } from '../charts/tfx-price-series/tfx-price-series.component'
+import { StaticDataService } from '../../common/static-data/static-data.service'
+import { LiveSeriesComponent } from '../charts/live-series/live-series.component'
 import { NotificationService } from '../../common/notification.service'
 
 @Component({
-  selector: 'app-tfx',
-  templateUrl: './tfx.component.html',
-  styleUrls: ['./tfx.component.css'],
+  selector: 'app-spot-price',
+  templateUrl: './spotPrice.component.html',
+  styleUrls: ['./spotPrice.component.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -21,21 +21,21 @@ import { NotificationService } from '../../common/notification.service'
     ]),
   ]
 })
-export class TfxComponent implements OnInit {
+export class SpotPriceComponent implements OnInit {
 
-  @ViewChildren(TfxPriceSeriesComponent) charts : any;
-  private currentChart: TfxPriceSeriesComponent| null;
+  @ViewChildren(LiveSeriesComponent) charts : any;
+  private currentChart: LiveSeriesComponent| null;
 
   private currencies: Currency[];
   displayedColumns = ["symbol", "spotDate", "marketBid", "marketAsk", "bid", "ask", "spread"];
   massQuotes: MassQuote[] = new Array();
-  tfxPrices: MassQuote[];
+  spotPrices: MassQuote[];
   expandedElement: MassQuote | null;
 
-  constructor(private tfxStaticDataService: TfxStaticDataService, private massQuoteService: MassQuoteService, private notificationService: NotificationService) { }
+  constructor(private staticDataService: StaticDataService, private massQuoteService: MassQuoteService, private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.tfxStaticDataService.getTfxCurrencies().subscribe(
+    this.staticDataService.getForwardCcyPairs().subscribe(
       (res: Currency[]) => {
         this.currencies = res;
         //console.log(res)
@@ -60,7 +60,7 @@ export class TfxComponent implements OnInit {
           break;
         }
       }
-      this.tfxPrices = Object.assign([], this.massQuotes);
+      this.spotPrices = Object.assign([], this.massQuotes);
     });
   }
 

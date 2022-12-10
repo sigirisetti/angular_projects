@@ -1,8 +1,8 @@
 'use strict';
 
 export const MAX_SERIES_LENGTH = 500;
-export const restApiBase: string = "http://localhost:8484/gui-mock"
-export const wsBase: string = "ws://localhost:8484/gui-mock"
+export const restApiBase: string = "http://localhost:8484/ch-client"
+export const wsBase: string = "ws://localhost:8484/ch-client"
 
 
 /* Web Sockets */
@@ -13,4 +13,4 @@ export const samplesUrl: string = wsBase + "/name"
 
 
 /* REST API */
-export const tfxCurrenciesUrl: string = restApiBase + "/tfxCurrencies"
+export const forwardCcyPairsUrl: string = restApiBase + "/forwardCcyPairs"

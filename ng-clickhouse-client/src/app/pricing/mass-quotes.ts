@@ -1,18 +1,17 @@
 export class MassQuote {
-    symbol: String;
+    symbol: string;
+
+    tradeDate: string;
+    spotDate: String;
     settleDate: Date;
+
     marketBid: number;
     marketAsk: number;
-    
-    exchangeId: number;
-    customerId: String;
-    sessionId: String;
-    pricingProfileId: number;
-    instrumentType: String;
-    deliverable: boolean;
-    spotDate: String;
     bid: number;
     ask: number;
-    tfxLarge: boolean;
+    
+    exchangeId: number;
+    customerId: string;
+    sessionId: string;
     spread: number;
 }

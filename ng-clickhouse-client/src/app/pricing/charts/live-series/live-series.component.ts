@@ -4,16 +4,15 @@ import { BaseChartDirective } from 'ng2-charts';
 import { default as Annotation } from 'chartjs-plugin-annotation';
 import { MassQuoteService } from '../../mass-quotes-service'
 import { Subscription, Subscriber } from 'rxjs';
-import { TfxStaticDataService } from '../../../common/static-data/tfx-static-data.service'
-import { Currency } from '../../../common/static-data/currency';
+import { StaticDataService } from '../../../common/static-data/static-data.service'
 import * as globals from '../../../globals'
 
 @Component({
-  selector: 'app-tfx-price-series',
-  templateUrl: './tfx-price-series.component.html',
-  styleUrls: ['./tfx-price-series.component.css']
+  selector: 'app-live-series',
+  templateUrl: './live-series.component.html',
+  styleUrls: ['./live-series.component.css']
 })
-export class TfxPriceSeriesComponent implements OnInit, OnDestroy {
+export class LiveSeriesComponent implements OnInit, OnDestroy {
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
@@ -81,7 +80,7 @@ export class TfxPriceSeriesComponent implements OnInit, OnDestroy {
   public lineChartLabels: string[] = [];
   public lineChartLabelsInternal: string[] = [];
 
-  constructor(private tfxStaticDataService: TfxStaticDataService, private massQuoteService: MassQuoteService) {
+  constructor(private staticDataService: StaticDataService, private massQuoteService: MassQuoteService) {
     Chart.register(Annotation)
   }
 

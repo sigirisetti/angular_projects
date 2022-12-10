@@ -9,12 +9,12 @@ import * as globals from '../../globals'
 @Injectable({
   providedIn: 'root'
 })
-export class TfxStaticDataService {
+export class StaticDataService {
 
   constructor(private http: HttpClient) { 
   }
 
-  getTfxCurrencies(): Observable<Currency[]> {
-    return this.http.get<Currency[]>(globals.restApiBase + "/tfxCurrencies");
+  getForwardCcyPairs(): Observable<Currency[]> {
+    return this.http.get<Currency[]>(globals.forwardCcyPairsUrl);
   }
 }

@@ -11,7 +11,7 @@ import CircularBuffer from 'circularbuffer'
 import { MassQuote } from './mass-quotes';
 import { Currency } from '../common/static-data/currency';
 
-import { TfxStaticDataService } from '../common/static-data/tfx-static-data.service'
+import { StaticDataService } from '../common/static-data/static-data.service'
 import { NotificationService } from '../common/notification.service'
 
 @Injectable({
@@ -37,7 +37,7 @@ export class MassQuoteService implements OnInit {
     private tickSubjectMap: Map<string, Subject<number[]>> = new Map();
     private tickObsMap: Map<string, Observable<number[]>> = new Map();
 
-    constructor(private tfxStaticDataService: TfxStaticDataService, private notificationService: NotificationService) {
+    constructor(private staticDataService: StaticDataService, private notificationService: NotificationService) {
         this.getMassQuotes();
     }
 
@@ -46,7 +46,7 @@ export class MassQuoteService implements OnInit {
 
     getMassQuotes() {
 
-        this.tfxStaticDataService.getTfxCurrencies().subscribe(
+        this.staticDataService.getForwardCcyPairs().subscribe(
             (res: Currency[]) => {
                 this.currencies = res;
                 for (let currency of res) {
@@ -146,22 +146,22 @@ export class MassQuoteService implements OnInit {
         massquote.symbol = payload.symbol;
         massquote.settleDate = payload.settleDate;
 
-        if (dataType === "com.ssk.ng.guimock.ws.MarketData") {
+        if (dataType === "com.ssk.ng.clickhouseclient.ws.MarketData") {
             //console.log("Market data")
             massquote.marketBid = payload.marketBid;
             this.mktBidSubjectMap.get(massquote.symbol)?.next(massquote.marketBid);
             massquote.marketAsk = payload.marketAsk;
             this.mktAskSubjectMap.get(massquote.symbol)?.next(massquote.marketAsk);
-        } else if (dataType === "com.ssk.ng.guimock.ws.MassQuotes") {
+        } else if (dataType === "com.ssk.ng.clickhouseclient.ws.MassQuotes") {
             //console.log("Mass Quote")
             massquote.exchangeId = payload.exchangeId;
             massquote.customerId = payload.customerId;
             massquote.sessionId = payload.sessionId;
-            massquote.pricingProfileId = payload.pricingProfileId;
-            massquote.instrumentType = payload.instrumentType;
-            massquote.deliverable = payload.deliverable;
+            //massquote.pricingProfileId = payload.pricingProfileId;
+            //massquote.instrumentType = payload.instrumentType;
+            //massquote.deliverable = payload.deliverable;
             massquote.spotDate = payload.spotDate;
-            massquote.tfxLarge = payload.tfxLarge;
+            //massquote.tfxLarge = payload.tfxLarge;
 
             massquote.bid = payload.bid;
             this.bidSubjectMap.get(massquote.symbol)?.next(massquote.bid);
