@@ -45,6 +45,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { NgChartsModule } from 'ng2-charts';
@@ -62,6 +63,7 @@ import { SpotPriceComponent } from './pricing/spotPrice/spotPrice.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavService } from './core/nav/nav.service';
 import { StaticDataService } from './common/static-data/static-data.service';
+import { MemoryComponent } from './clickhouse/monitoring/memory/memory.component';
 
 @NgModule({
   imports: [
@@ -114,7 +116,8 @@ import { StaticDataService } from './common/static-data/static-data.service';
     PortalModule,
     ScrollingModule,
     NgChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -127,6 +130,7 @@ import { StaticDataService } from './common/static-data/static-data.service';
     StocksComponent,
     LiveSeriesComponent,
     SpotPriceComponent,
+    MemoryComponent,
   ],
   exports: [
     AppComponent,

@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Clickhouse Memory Usage</mat-card-title>
+        <mat-card-subtitle>select all database</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card>
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <mat-checkbox formControlName="pae">PAE</mat-checkbox>
+            <mat-checkbox formControlName="system">System</mat-checkbox>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+        </form>
+    </mat-card>
+</mat-card>

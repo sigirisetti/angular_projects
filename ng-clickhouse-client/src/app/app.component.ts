@@ -14,6 +14,42 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('appDrawer', { static: true }) public appDrawer!: ElementRef;
   navItems: NavItem[] = [
     {
+      displayName: 'Clickhouse Monitoring',
+      iconName: 'monitoring',
+      children: [
+        {
+          displayName: 'Memory Usage',
+          iconName: 'memory',
+          route: 'clickhouse/monitoring/memory'
+        },
+        {
+          displayName: 'TTL Usage',
+          iconName: 'hourglass_top',
+          route: 'clickhouse/monitoring/ttlUsage'
+        },
+        {
+          displayName: 'Logged In Users',
+          iconName: 'person',
+          route: 'clickhouse/monitoring/users'
+        },
+        {
+          displayName: 'Current / Query History',
+          iconName: 'query_stats',
+          route: 'clickhouse/monitoring/queries'
+        },
+        {
+          displayName: 'Active Processes',
+          iconName: 'run_circle',
+          route: 'clickhouse/monitoring/processes'
+        },
+        {
+          displayName: 'Active Merges',
+          iconName: 'merge',
+          route: 'clickhouse/monitoring/merges'
+        },
+      ]
+    },
+    {
       displayName: 'PAE',
       iconName: 'currency_exchange',
       route: '',
@@ -26,38 +62,7 @@ export class AppComponent implements AfterViewInit {
         {
           displayName: 'Forward Points',
           iconName: 'scoreboard',
-          route: '',
-        },
-      ]
-    },
-    {
-      displayName: 'Clickhouse Monitoring',
-      iconName: 'monitoring',
-      children: [
-        {
-          displayName: 'Overall Memory Usage',
-          iconName: 'memory',
-          route: ''
-        },
-        {
-          displayName: 'System Table Memory Usage',
-          iconName: 'S',
-          route: ''
-        },
-        {
-          displayName: 'PAE Table Memory Usage',
-          iconName: 'P',
-          route: ''
-        },
-        {
-          displayName: 'PAE TTL Usage',
-          iconName: 'hourglass_top',
-          route: ''
-        },
-        {
-          displayName: 'System TTL Usage',
-          iconName: 'hourglass_top',
-          route: ''
+          route: 'market-data/forwardPoints',
         },
       ]
     },
@@ -72,12 +77,12 @@ export class AppComponent implements AfterViewInit {
         },
         {
           displayName: 'Line Chart',
-          iconName: 'star_rate',
+          iconName: 'stacked_line_chart',
           route: 'samples/charts/line-chart'
         },
         {
           displayName: 'Expandable Table Rows',
-          iconName: 'star_rate',
+          iconName: 'expand_content',
           route: 'samples/ng-examples/expandable-table-rows'
         }
       ]
