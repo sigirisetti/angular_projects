@@ -1,11 +1,13 @@
 import { Component, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { Chart, ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
+import { Chart, ChartDataset, ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { default as Annotation } from 'chartjs-plugin-annotation';
 import { MassQuoteService } from '../../mass-quotes-service'
 import { Subscription, Subscriber } from 'rxjs';
 import { StaticDataService } from '../../../common/static-data/static-data.service'
 import * as globals from '../../../globals'
+import { formatDate } from '@angular/common';
+import { Inject, LOCALE_ID } from '@angular/core';
 
 @Component({
   selector: 'app-live-series',
@@ -19,18 +21,26 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
   @Input()
   public ccyPair = "";
 
+  constructor(
+    @Inject(LOCALE_ID) public locale: string,
+    private staticDataService: StaticDataService,
+    private massQuoteService: MassQuoteService) {
+    Chart.register(Annotation)
+  }
   private priceTickSub: Subscription;
 
   public lineChartLegend = true;
 
-  public lineChartType: ChartType = 'line';
+  public lineChartLabels: string[] = [];
+
+  public lineChartLabelsInternal: string[] = [];
 
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
       {
         data: [],
         label: 'Mkt Bid',
-        backgroundColor: 'rgba(148,159,177,0.2)',
+        backgroundColor: 'rgba(0,0,100,0.2)',
         borderColor: 'rgba(148,159,177,1)',
         pointBackgroundColor: 'rgba(148,159,177,1)',
         pointBorderColor: '#fff',
@@ -41,7 +51,7 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
       {
         data: [],
         label: 'Mkt Ask',
-        backgroundColor: 'rgba(77,83,96,0.2)',
+        backgroundColor: 'rgba(0,0,100,0.2)',
         borderColor: 'rgba(77,83,96,1)',
         pointBackgroundColor: 'rgba(77,83,96,1)',
         pointBorderColor: '#fff',
@@ -52,8 +62,7 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
       {
         data: [],
         label: 'Bid',
-        yAxisID: 'y1',
-        backgroundColor: 'rgba(255,0,0,0.3)',
+        backgroundColor: 'rgba(100,0,0,0.3)',
         borderColor: 'red',
         pointBackgroundColor: 'rgba(148,159,177,1)',
         pointBorderColor: '#fff',
@@ -64,8 +73,7 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
       {
         data: [],
         label: 'Ask',
-        yAxisID: 'y1',
-        backgroundColor: 'rgba(255,0,0,0.3)',
+        backgroundColor: 'rgba(100,0,0,0.3)',
         borderColor: 'red',
         pointBackgroundColor: 'rgba(148,159,177,1)',
         pointBorderColor: '#fff',
@@ -74,64 +82,18 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
         fill: 'origin',
       }
     ],
-    labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July' ]
+    labels: this.lineChartLabels,
   };
-
-  public lineChartLabels: string[] = [];
-  public lineChartLabelsInternal: string[] = [];
-
-  constructor(private staticDataService: StaticDataService, private massQuoteService: MassQuoteService) {
-    Chart.register(Annotation)
-  }
-
-  ngOnInit() {
-    //console.log("tfx price series component initialized : " + this.createTime)
-  }
-
-  ngOnDestroy(): void {
-    //console.log("tfx price series component destroyed!")
-  }
 
   public lineChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
-      xAxes: {
-        display: true,
-        ticks: {
-          color: 'black',
-        }
-      },
-      yAxes: 
-        {
-          position: 'left',
-          ticks: {
-            color: 'black',
-          }
-        }
-      
     },
-    plugins :{
-      legend: {display: true},
+    plugins: {
+      legend: { display: true },
       annotation: {
-        annotations: [
-          {
-            type: 'line',
-            scaleID: 'x-axis-0',
-            value: 'March',
-            borderColor: 'orange',
-            borderWidth: 2,
-            label: {
-              display: true,
-              position: 'center',
-              color: 'orange',
-              content: 'LineAnno',
-              font: {
-                weight: 'bold'
-              }
-            }
-          },
-        ],
+        annotations: [],
       },
     },
     elements: {
@@ -142,6 +104,14 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
     }
   };
 
+
+  ngOnInit() {
+    //console.log("spot price series component initialized : " + this.createTime)
+  }
+
+  ngOnDestroy(): void {
+    //console.log("spot price series component destroyed!")
+  }
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -161,7 +131,7 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
     this.priceTickSub.unsubscribe();
   }
 
-  public pushOne(tick: any) {
+  public pushOne(ccyPair: string, tick: any) {
     this.lineChartData.datasets.forEach((x, i) => {
       if (x.data.length == globals.MAX_SERIES_LENGTH) {
         x.data.slice(1);
@@ -169,15 +139,17 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
       x.data.push(tick[i]);
     })
     if (this.lineChartLabelsInternal.length < globals.MAX_SERIES_LENGTH) {
-      this.lineChartLabelsInternal.push(`T-${this.lineChartLabelsInternal.length}`);
+      this.lineChartLabelsInternal.push(formatDate(new Date(), 'HH:mm:ss.SSS', this.locale));
+      //this.lineChartLabelsInternal.push(`T-${this.lineChartLabelsInternal.length}`);
     }
-    this.lineChartLabels = this.lineChartLabelsInternal.slice().reverse();
+    this.updateLabelsWithNewLabels();
+    console.log("updating chart " + ccyPair + " after : " + tick)
     this.chart.update();
   }
 
-  subscribeToPriceTicks(ccyPair: string) : any {
+  subscribeToPriceTicks(ccyPair: string): any {
     const subscriber = Subscriber.create(
-      (tick) => this.pushOne(tick),
+      (tick) => this.pushOne(ccyPair, tick),
       (error) => { console.log("Failed to subscribe for " + ccyPair + " price series") }
     );
     console.log("Subscribing price ticks for " + ccyPair)
@@ -185,15 +157,26 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
   }
 
   getChartData(ccyPair: string) {
-    this.lineChartData = this.massQuoteService.getChartData(ccyPair);
-    let len = this.lineChartData.datasets[0].data.length;
+    let chartdataset: ChartDataset[] = this.massQuoteService.getChartData(ccyPair);
+    let len = chartdataset[0].data.length;
     if (this.lineChartLabelsInternal.length < globals.MAX_SERIES_LENGTH) {
       this.lineChartLabelsInternal = [];
       for (let i = 0; i < len; i++) {
-        this.lineChartLabelsInternal.push(`T-${i}`);
+        this.lineChartLabelsInternal.push(formatDate(new Date(), 'HH:mm:ss.SSS', this.locale));
+        //this.lineChartLabelsInternal.push(`T-${i}`);
       }
-      this.lineChartLabels = this.lineChartLabelsInternal.slice().reverse();
+      this.updateLabelsWithNewLabels();
     }
-    //console.log("Got initial chart data for " + ccyPair + " with length " + this.lineChartData[0].data.length)
+    chartdataset.forEach((e, i) => {
+      this.lineChartData.datasets[i].data.length = 0;
+      this.lineChartData.datasets[i].data.push(...e.data);
+    })
+    this.chart.update();
+    console.log("Got chart data for " + ccyPair + " with length " + chartdataset[0].data.length)
+  }
+
+  updateLabelsWithNewLabels() {
+    this.lineChartLabels.length = 0;
+    this.lineChartLabels.push(...this.lineChartLabelsInternal.slice().reverse());
   }
 }
