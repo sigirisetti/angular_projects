@@ -14,25 +14,56 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('appDrawer', { static: true }) public appDrawer!: ElementRef;
   navItems: NavItem[] = [
     {
-      displayName: 'Forward Curve',
-      iconName: 'euro',
+      displayName: 'PAE',
+      iconName: 'currency_exchange',
       route: '',
       children: [
         {
-          displayName: 'Excel',
-          iconName: 'star_rate',
+          displayName: 'Agency Spot Prices',
+          iconName: 'price_change',
           route: 'pricing/spot-prices'
         },
         {
-          displayName: 'LP',
-          iconName: 'star_rate',
-          route: 'pricing/spot-prices',
+          displayName: 'Forward Points',
+          iconName: 'scoreboard',
+          route: '',
         },
       ]
     },
     {
-      displayName: 'Samples',
-      iconName: 'view_list',
+      displayName: 'Clickhouse Monitoring',
+      iconName: 'monitoring',
+      children: [
+        {
+          displayName: 'Overall Memory Usage',
+          iconName: 'memory',
+          route: ''
+        },
+        {
+          displayName: 'System Table Memory Usage',
+          iconName: 'S',
+          route: ''
+        },
+        {
+          displayName: 'PAE Table Memory Usage',
+          iconName: 'P',
+          route: ''
+        },
+        {
+          displayName: 'PAE TTL Usage',
+          iconName: 'hourglass_top',
+          route: ''
+        },
+        {
+          displayName: 'System TTL Usage',
+          iconName: 'hourglass_top',
+          route: ''
+        },
+      ]
+    },
+    {
+      displayName: 'Test Pages',
+      iconName: 'school',
       children: [
         {
           displayName: 'Stock Quotes',

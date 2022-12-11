@@ -177,6 +177,6 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
 
   updateLabelsWithNewLabels() {
     this.lineChartLabels.length = 0;
-    this.lineChartLabels.push(...this.lineChartLabelsInternal.slice().reverse());
+    this.lineChartLabels.push(...this.lineChartLabelsInternal.slice());
   }
 }
