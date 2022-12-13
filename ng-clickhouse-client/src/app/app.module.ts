@@ -64,6 +64,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavService } from './core/nav/nav.service';
 import { StaticDataService } from './common/static-data/static-data.service';
 import { MemoryComponent } from './clickhouse/monitoring/memory/memory.component';
+import {ClickhouseEnvService} from './core/nav/clickhouse-env.service';
+import {MonitoringService} from './clickhouse/monitoring.service';
+import { GlobalStateService } from './common/global-state.service';
 
 @NgModule({
   imports: [
@@ -146,7 +149,10 @@ import { MemoryComponent } from './clickhouse/monitoring/memory/memory.component
   ],
   providers: [
     NavService,
-    StaticDataService
+    StaticDataService,
+    ClickhouseEnvService,
+    MonitoringService,
+    GlobalStateService
   ],
   bootstrap: [AppComponent]
 })

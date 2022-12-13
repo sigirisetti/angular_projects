@@ -4,7 +4,7 @@
         <mat-card-subtitle>select all database</mat-card-subtitle>
     </mat-card-header>
     <mat-card>
-        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="dbSelectionForm" (ngSubmit)="onSubmit()">
             <mat-checkbox formControlName="pae">PAE</mat-checkbox>
             <mat-checkbox formControlName="system">System</mat-checkbox>
             <button mat-raised-button color="primary" type="submit">Submit</button>
