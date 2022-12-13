@@ -146,13 +146,13 @@ export class MassQuoteService implements OnInit {
         massquote.symbol = payload.symbol;
         massquote.settleDate = payload.settleDate;
 
-        if (dataType === "com.ssk.ng.clickhouseclient.ws.MarketData") {
+        if (dataType === "com.ssk.ng.clickhouseclient.websocket.MarketData") {
             //console.log("Market data")
             massquote.marketBid = payload.marketBid;
             this.mktBidSubjectMap.get(massquote.symbol)?.next(massquote.marketBid);
             massquote.marketAsk = payload.marketAsk;
             this.mktAskSubjectMap.get(massquote.symbol)?.next(massquote.marketAsk);
-        } else if (dataType === "com.ssk.ng.clickhouseclient.ws.MassQuotes") {
+        } else if (dataType === "com.ssk.ng.clickhouseclient.websocket.MassQuotes") {
             //console.log("Mass Quote")
             massquote.exchangeId = payload.exchangeId;
             massquote.customerId = payload.customerId;
@@ -170,7 +170,7 @@ export class MassQuoteService implements OnInit {
             this.spreadSubjectMap.get(massquote.symbol)?.next(massquote.spread);
         } else {
             this.notificationService.error$.next("Unknown datatype : " + dataType);
-            console.log("Unknown datatype : {}", dataType)
+            console.log("Unknown datatype : " + dataType)
         }
         this.messages.next(massquote);
     }
