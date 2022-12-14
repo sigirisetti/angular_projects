@@ -87,6 +87,7 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
 
   public lineChartOptions: ChartConfiguration['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
     },
@@ -134,13 +135,16 @@ export class LiveSeriesComponent implements OnInit, OnDestroy {
   public pushOne(ccyPair: string, tick: any) {
     this.lineChartData.datasets.forEach((x, i) => {
       if (x.data.length == globals.MAX_SERIES_LENGTH) {
-        x.data.slice(1);
+        x.data.shift();
       }
       x.data.push(tick[i]);
     })
     if (this.lineChartLabelsInternal.length < globals.MAX_SERIES_LENGTH) {
       this.lineChartLabelsInternal.push(formatDate(new Date(), 'HH:mm:ss.SSS', this.locale));
       //this.lineChartLabelsInternal.push(`T-${this.lineChartLabelsInternal.length}`);
+    }else {
+      this.lineChartLabelsInternal.shift();
+      this.lineChartLabelsInternal.push(formatDate(new Date(), 'HH:mm:ss.SSS', this.locale));  
     }
     this.updateLabelsWithNewLabels();
     console.log("updating chart " + ccyPair + " after : " + tick)
