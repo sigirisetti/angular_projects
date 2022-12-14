@@ -55,13 +55,19 @@
 
       </mat-tab>
 
-      <mat-tab label="Chart">
+      <mat-tab label="Memory Usage Chart">
         <canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
-          [type]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+          [type]="barChartType" (chartHover)="barChartHovered($event)" (chartClick)="barChartClicked($event)">
         </canvas>
       </mat-tab>
 
-      
+      <mat-tab label="Disk Space Usage">
+        <div style="display: block; width: 800px; height: 600px;">
+          <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"
+            [plugins]="pieChartPlugins">
+          </canvas>
+        </div>
+      </mat-tab>
     </mat-tab-group>
   </mat-card-content>
 </mat-card>

@@ -16,4 +16,10 @@ export class MonitoringService {
     let params = new HttpParams().append("system", system).set("pae", pae);
     return this.http.get(globals.dbTableSize, { headers, params });
   }
+
+  getSystemDisks(): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let params = new HttpParams();
+    return this.http.get(globals.getSystemDisks, { headers, params });
+  }
 }

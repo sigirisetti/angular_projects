@@ -16,3 +16,4 @@ export const forwardCcyPairsUrl: string = restApiBase + "/forwardCcyPairs";
 export const chConnConfig: string = restApiBase + "/chConnConfig";
 export const setSelectedEnv: string = restApiBase + "/setSelectedEnv";
 export const dbTableSize: string = restApiBase + "/clickhouse/dbTableSizes";
+export const getSystemDisks: string = restApiBase + "/clickhouse/getSystemDisks";

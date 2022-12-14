@@ -7,6 +7,7 @@ import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 
 import { MonitoringService } from '../../monitoring.service';
 import { ChDbTableSize } from 'src/app/common/model/ch-db-table-size';
+import { SystemDisk } from 'src/app/common/model/ch-system-disk';
 import { MessageDialogServiceService } from 'src/app/common/message-dialog-service.service';
 import { GlobalStateService } from 'src/app/common/global-state.service';
 
@@ -69,6 +70,11 @@ export class MemoryComponent {
         this.barChartData.datasets[0].data = newNumbers;
         console.log(this.barChartData.datasets[0].data)
       });
+
+      this.monitoringService.getSystemDisks()
+      .subscribe((data: SystemDisk[]) => {
+        this.pieChartData.datasets[0].data = [data[0].totalSpace - data[0].freeSpace, data[0].freeSpace];
+      });
   }
 
   updateName() {
@@ -79,7 +85,7 @@ export class MemoryComponent {
    * Bar chart code
    */
 
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  @ViewChild(BaseChartDirective) barChart: BaseChartDirective | undefined;
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -113,13 +119,73 @@ export class MemoryComponent {
   };
 
   // events
-  public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+  public barChartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     console.log(event, active);
   }
 
-  public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
+  public barChartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     console.log(event, active);
   }
 
   public randomize(): void {}
+
+  /**
+   * Pie chart code
+   */
+  @ViewChild(BaseChartDirective) pieChart: BaseChartDirective | undefined;
+
+  // Pie
+  public pieChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      },
+      datalabels: {
+        formatter: (value, ctx) => {
+          if (ctx.chart.data.labels) {
+            return ctx.chart.data.labels[ctx.dataIndex];
+          }
+        },
+      },
+    }
+  };
+  public pieChartData: ChartData<'pie', number[], string | string[]> = {
+    labels: [ 'Used Memory', 'Free Memory'],
+    datasets: [ {
+      data: []
+    } ]
+  };
+  public pieChartType: ChartType = 'pie';
+  public pieChartPlugins = [ 
+    DataLabelsPlugin
+   ];
+
+  // events
+  public chartClicked({ event, active }: { event: ChartEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  changeLegendPosition(): void {
+    if (this.pieChartOptions?.plugins?.legend) {
+      this.pieChartOptions.plugins.legend.position = this.pieChartOptions.plugins.legend.position === 'left' ? 'top' : 'left';
+    }
+
+    this.pieChart?.render();
+  }
+
+  toggleLegend(): void {
+    if (this.pieChartOptions?.plugins?.legend) {
+      this.pieChartOptions.plugins.legend.display = !this.pieChartOptions.plugins.legend.display;
+    }
+
+    this.pieChart?.render();
+  }
+
 }

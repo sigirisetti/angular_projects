@@ -38,21 +38,3 @@ mat-checkbox {
 mat-form-field {
   margin-right: 20px;
 }
-
-/* side nav*/
-.active-link {
-  background: rgba(255, 255, 255, 0.2);
-  border-left: 5px solid yellow;
-
-  // .nav-item-icon {
-  //   margin-left: -5px;
-  // }
-}
-
-.close-nav-state {
-  .active-link {
-    span {
-      margin-left: 15px;
-    }
-  }
-}
