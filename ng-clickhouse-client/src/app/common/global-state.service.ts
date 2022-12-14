@@ -17,5 +17,5 @@ export class GlobalStateService {
   getSelectedEnv() : ChConnConfig {
     return this.selectedEnv;
   }
-  
+
 }

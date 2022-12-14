@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChConnConfig } from 'src/app/common/model/ch-conn-config';
 import * as globals from '../../globals'
+import { GlobalStateService } from 'src/app/common/global-state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClickhouseEnvService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private globalStateService: GlobalStateService) {
   }
 
   chConnConfig(): Observable<ChConnConfig[]> {
@@ -18,6 +19,7 @@ export class ClickhouseEnvService {
 
   setSelectedEnv(selectedEnv: ChConnConfig) {
     this.http.put<ChConnConfig>(globals.setSelectedEnv, selectedEnv)
-        .subscribe(data => console.log(data));
+      .subscribe(data => console.log(data));
+    this.globalStateService.setSelectedEnv(selectedEnv);
   }
 }

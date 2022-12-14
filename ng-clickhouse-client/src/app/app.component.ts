@@ -3,6 +3,8 @@ import {NavItem} from './core/nav/nav-item';
 import {NavService} from './core/nav/nav.service';
 import {NotificationService} from './common/notification.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { MessageDialogComponent } from './common/message-dialog/message-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -90,6 +92,7 @@ export class AppComponent implements AfterViewInit {
   ];
 
   constructor(
+    private dialog: MatDialog,
     private navService: NavService, 
     private snackBar: MatSnackBar, 
     private notificationService: NotificationService) {
@@ -106,6 +109,16 @@ export class AppComponent implements AfterViewInit {
           panelClass: ['red-snackbar']
         });
       });
+  }
+
+  openDialog() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    this.dialog.open(MessageDialogComponent, dialogConfig);
   }
 
   ngAfterViewInit() {

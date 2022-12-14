@@ -67,6 +67,8 @@ import { MemoryComponent } from './clickhouse/monitoring/memory/memory.component
 import {ClickhouseEnvService} from './core/nav/clickhouse-env.service';
 import {MonitoringService} from './clickhouse/monitoring.service';
 import { GlobalStateService } from './common/global-state.service';
+import { MessageDialogComponent } from './common/message-dialog/message-dialog.component';
+import { MessageDialogServiceService } from './common/message-dialog-service.service';
 
 @NgModule({
   imports: [
@@ -134,6 +136,7 @@ import { GlobalStateService } from './common/global-state.service';
     LiveSeriesComponent,
     SpotPriceComponent,
     MemoryComponent,
+    MessageDialogComponent,
   ],
   exports: [
     AppComponent,
@@ -152,7 +155,8 @@ import { GlobalStateService } from './common/global-state.service';
     StaticDataService,
     ClickhouseEnvService,
     MonitoringService,
-    GlobalStateService
+    GlobalStateService,
+    MessageDialogServiceService
   ],
   bootstrap: [AppComponent]
 })
