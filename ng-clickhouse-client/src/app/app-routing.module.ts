@@ -6,7 +6,7 @@ import {SpotPriceComponent} from './pricing/spotPrice/spotPrice.component'
 import { LineChartComponent } from './samples/charts/line-chart/line-chart.component'
 import { ExpandableTableComponent } from './samples/ng-examples/expandable-table/expandable-table.component'
 import {MemoryComponent} from './clickhouse/monitoring/memory/memory.component'
-
+import { TtlUsageComponent } from './clickhouse/monitoring/ttl-usage/ttl-usage.component';
 
 
 const routes: Routes = [
@@ -14,6 +14,7 @@ const routes: Routes = [
   {path: 'clickhouse', children: [
     {path: 'monitoring', children: [
       {path: 'memory', component: MemoryComponent},
+      {path: 'ttlUsage', component: TtlUsageComponent},
       {path: 'users', component: PageUnderConstructionComponent},
       {path: 'queries', component: PageUnderConstructionComponent},
       {path: 'merges', component: PageUnderConstructionComponent},

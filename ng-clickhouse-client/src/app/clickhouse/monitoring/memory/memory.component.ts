@@ -76,7 +76,7 @@ export class MemoryComponent {
   }
 
   /**
-   * Charting code
+   * Bar chart code
    */
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;

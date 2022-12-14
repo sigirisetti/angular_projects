@@ -11,27 +11,48 @@
 
 
 body {
-    margin: 0;
+  margin: 0;
+}
+
+.cell-right .mat-column- {
+  justify-content: flex-end;
+}
+
+
+
+/* Snack bar */
+
+.blue-snackbar {
+  background: #2196F3;
+}
+
+.red-snackbar {
+  background: #F44336;
+}
+
+/* spacing between checkboxes*/
+mat-checkbox {
+  margin-right: 20px;
+}
+
+mat-form-field {
+  margin-right: 20px;
+}
+
+/* side nav*/
+.active-link {
+  background: rgba(255, 255, 255, 0.2);
+  border-left: 5px solid yellow;
+
+  // .nav-item-icon {
+  //   margin-left: -5px;
+  // }
+}
+
+.close-nav-state {
+  .active-link {
+    span {
+      margin-left: 15px;
+    }
   }
-  
-  .cell-right .mat-column- { justify-content: flex-end; }
-  
-  
-  
-  /* Snack bar */
-  
-  .blue-snackbar {
-    background: #2196F3;
-  }
-  
-  .red-snackbar {
-    background: #F44336;
-  }
-  
-  mat-checkbox {
-    margin-right: 20px;
-  }  
-  
-  mat-form-field {
-    margin-right: 20px;
-  }
+}

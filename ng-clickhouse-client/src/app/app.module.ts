@@ -69,6 +69,7 @@ import {MonitoringService} from './clickhouse/monitoring.service';
 import { GlobalStateService } from './common/global-state.service';
 import { MessageDialogComponent } from './common/message-dialog/message-dialog.component';
 import { MessageDialogServiceService } from './common/message-dialog-service.service';
+import { TtlUsageComponent } from './clickhouse/monitoring/ttl-usage/ttl-usage.component';
 
 @NgModule({
   imports: [
@@ -137,6 +138,7 @@ import { MessageDialogServiceService } from './common/message-dialog-service.ser
     SpotPriceComponent,
     MemoryComponent,
     MessageDialogComponent,
+    TtlUsageComponent,
   ],
   exports: [
     AppComponent,
