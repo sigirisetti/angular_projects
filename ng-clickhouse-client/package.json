@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
     "chartjs-plugin-annotation": "^2.1.0",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "circularbuffer": "^0.1.1",
     "date-and-time": "^2.4.1",
     "ng2-charts": "^4.1.1",
